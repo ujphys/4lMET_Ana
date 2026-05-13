@@ -71,20 +71,12 @@ StatusCode MyxAODAnalysis :: initialize ()
     //Dark Vector Boson (Zd)
     ANA_CHECK (book (TH1D("h_pT_Zd1", "h_pT_Zd1", 100, 0, 500))); //pT
     ANA_CHECK (book (TH1D("h_pT_Zd2", "h_pT_Zd2", 100, 0, 500)));
-    ANA_CHECK (book (TH1D("h_pT_Zd3", "h_pT_Zd3", 100, 0, 500)));
-    ANA_CHECK (book (TH1D("h_pT_Zd4", "h_pT_Zd4", 100, 0, 500)));
     ANA_CHECK (book (TH1D("h_eta_Zd1","h_eta_Zd1", 100, -4.5, 4.5))); //eta
     ANA_CHECK (book (TH1D("h_eta_Zd2","h_eta_Zd2", 100, -4.5, 4.5)));
-    ANA_CHECK (book (TH1D("h_eta_Zd3","h_eta_Zd3", 100, -4.5, 4.5)));
-    ANA_CHECK (book (TH1D("h_eta_Zd4","h_eta_Zd4", 100, -4.5, 4.5)));
     ANA_CHECK (book (TH1D("h_phi_Zd1", "h_phi_Zd1", 100, -4, 4))); //phi
     ANA_CHECK (book (TH1D("h_phi_Zd2", "h_phi_Zd2", 100, -4, 4)));
-    ANA_CHECK (book (TH1D("h_phi_Zd3", "h_phi_Zd3", 100, -4, 4)));
-    ANA_CHECK (book (TH1D("h_phi_Zd4", "h_phi_Zd4", 100, -4, 4)));
     ANA_CHECK (book (TH1D("h_m_Zd1", "h_m_Zd1", 1000, 19.99, 20.001))); //mass
     ANA_CHECK (book (TH1D("h_m_Zd2", "h_m_Zd2", 1000, 19.99, 20.001)));
-    ANA_CHECK (book (TH1D("h_m_Zd3", "h_m_Zd3", 1000, 19.99, 20.001)));
-    ANA_CHECK (book (TH1D("h_m_Zd4", "h_m_Zd4", 1000, 19.99, 20.001)));
     //Visible leptons (e; u;)
     ANA_CHECK (book (TH1D("h_pT_e1", "h_pT_e1", 100, 0, 500)));     ANA_CHECK (book (TH1D("h_pT_u1", "h_pT_u1", 100, 0, 500))); //pT
     ANA_CHECK (book (TH1D("h_pT_e2", "h_pT_e2", 100, 0, 500)));     ANA_CHECK (book (TH1D("h_pT_u2", "h_pT_u2", 100, 0, 500)));
@@ -108,8 +100,8 @@ StatusCode MyxAODAnalysis :: initialize ()
     ANA_CHECK (book (TH1D("h_phi_l1l2", "h_phi_l1l2", 100, -4, 4))); //phi
     ANA_CHECK (book (TH1D("h_phi_l3l4", "h_phi_l3l4", 100, -4, 4)));
     ANA_CHECK (book (TH1D("h_phi_4l", "h_phi_4l", 100, -4, 4)));
-    ANA_CHECK (book (TH1D("h_invMass_l1l2", "h_invMass_l1l2", 1000, 19.99, 20.001))); //invariant mass
-    ANA_CHECK (book (TH1D("h_invMass_l3l4", "h_invMass_l3l4", 1000, 19.99, 20.001)));
+    ANA_CHECK (book (TH1D("h_invMass_l1l2", "h_invMass_l1l2", 1000, 29.99, 30.001))); //invariant mass
+    ANA_CHECK (book (TH1D("h_invMass_l3l4", "h_invMass_l3l4", 1000, 29.99, 30.001)));
     ANA_CHECK (book (TH1D("h_invMass_4l", "h_invMass_4l", 100, 60, 200)));
     ANA_CHECK (book (TH1D("h_deltaR_l1l2","h_deltaR_l1l2", 100, 0, 8))); //delta-R
     ANA_CHECK (book (TH1D("h_deltaR_l1l4","h_deltaR_l1l4", 100, 0, 8)));
@@ -132,14 +124,13 @@ float l_multiplicity_5 = 0;
 float l_multiplicity_12 = 0;
 float l_multiplicity_22 = 0;
 int n_Higgs = 0;
-int n_S = 0;
 int n_Zd = 0;
-int n_childl1, n_childl2, n_childl3, n_childl4, n_childl5, n_childl6, n_childl7, n_childl8 = 0;
+int n_events = 0;
+int n_childl1, n_childl2, n_childl3, n_childl4 = 0;
 
 /* Kinematic variables */
 double m_H, pT_H, eta_H, phi_H; //H
-double m_Zd1, m_Zd2, pT_Zd1, pT_Zd2, eta_Zd1, eta_Zd2, phi_Zd1, phi_Zd2; //S
-double m_Zd1, m_Zd2, m_Zd3, m_Zd4, pT_Zd1, pT_Zd2, pT_Zd3, pT_Zd4, eta_Zd1, eta_Zd2, eta_Zd3, eta_Zd4, phi_Zd1, phi_Zd2, phi_Zd3, phi_Zd4; //Zd
+double m_Zd1, m_Zd2, pT_Zd1, pT_Zd2, eta_Zd1, eta_Zd2, phi_Zd1, phi_Zd2; //Zd
 double pT_e1, pT_e2, pT_e3, pT_e4, eta_e1, eta_e2, eta_e3, eta_e4, phi_e1, phi_e2, phi_e3, phi_e4; //electron pT, eta, phi
 double pT_u1, pT_u2, pT_u3, pT_u4, eta_u1, eta_u2, eta_u3, eta_u4, phi_u1, phi_u2, phi_u3, phi_u4; //muon pT, eta, phi
 double e_e1, e_e2, e_e3, e_e4, e_u1, e_u2, e_u3, e_u4; //electron/ muon energy
@@ -217,7 +208,8 @@ StatusCode MyxAODAnalysis :: execute ()
         const xAOD::TruthParticle* truth = *truth_itr;
         //Initialize bitmask variables
         // bool l1_bool, l3_bool, l5_bool, l7_bool = false;
-        bool l1_bool = false, l3_bool = false, l5_bool = false, l7_bool = false;
+        bool l1_bool = false, l3_bool = false;
+        // bool l5_bool = false, l7_bool = false;
 
         // Find Higgs and then the rest
         if(truth->pdgId()==25){
@@ -228,7 +220,7 @@ StatusCode MyxAODAnalysis :: execute ()
                     // ANA_MSG_INFO("Higgs decaying in " << decayVtx->nOutgoingParticles() << " particles");
                     // const xAOD::TruthParticle* H_child = decayVtx->outgoingParticle(0);
                     // std::cout << "H_child pdgID: " << H_child->pdgId() << " ___ ";
-                    // If the Higgs doesn't decay to two S, skip this truth particle
+                    // If the Higgs doesn't decay to two Zd, skip this truth particle
                     continue;
                 }
                 //ANA_MSG_INFO("Higgs found");
@@ -263,12 +255,6 @@ StatusCode MyxAODAnalysis :: execute ()
                         eta_Zd1 = childZd1 -> eta(); eta_Zd2 = childZd2 -> eta();
                         phi_Zd1 = childZd1 -> phi(); phi_Zd2 = childZd2 -> phi();
                         m_Zd1 = childZd1 -> m(); m_Zd2 = childZd2 -> m();
-
-                        //------------Label the 3rd gen children (leptons)------------
-                        const xAOD::TruthParticle* childl1 = Zd1_decayVtx->outgoingParticle(0);
-                        const xAOD::TruthParticle* childl2 = Zd1_decayVtx->outgoingParticle(1);
-                        const xAOD::TruthParticle* childl3 = Zd2_decayVtx->outgoingParticle(0);
-                        const xAOD::TruthParticle* childl4 = Zd2_decayVtx->outgoingParticle(1);
 
                         // Print pdgIDs
                         // cout << "___pdgId's___ " << endl;
@@ -365,8 +351,8 @@ StatusCode MyxAODAnalysis :: execute ()
                         deltaR_l2l3 = get_deltaR(eta_l2, eta_l3, phi_l2, phi_l3);
                         deltaR_l3l4 = get_deltaR(eta_l3, eta_l4, phi_l3, phi_l4);
 
-                    }//close S decay check                 
-                }//close S identity check
+                    }//close Zd decay check                 
+                }//close Zd identity check
             }//close Higgs decay check
         }//close Higgs identity check
         
@@ -395,7 +381,7 @@ StatusCode MyxAODAnalysis :: execute ()
         hist ("h_eta_H") -> Fill(eta_H);
         hist ("h_phi_H") -> Fill(phi_H);
         hist ("h_m_H") -> Fill(m_H/1000);
-        //S
+        //Zd
         hist ("h_pT_Zd1") -> Fill(pT_Zd1/1000); hist ("h_pT_Zd2") -> Fill(pT_Zd2/1000);
         hist ("h_eta_Zd1") -> Fill(eta_Zd1); hist ("h_eta_Zd2") -> Fill(eta_Zd2);
         hist ("h_phi_Zd1") -> Fill(phi_Zd1); hist ("h_phi_Zd2") -> Fill(phi_Zd2);
@@ -418,12 +404,12 @@ StatusCode MyxAODAnalysis :: execute ()
         hist ("h_deltaR_l2l3") -> Fill(deltaR_l2l3);
         hist ("h_deltaR_l3l4") -> Fill(deltaR_l3l4);
         //MET
-        const xAOD::MissingET* truthMET_NonInt = nullptr;
-        truthMET_NonInt = (*truth_MET)["NonInt"];
-        hist ("h_missingET_NonInt") -> Fill(truthMET_NonInt->met()/1000); // Non-interacting MET
-        for (auto MissingET : *truth_MET ){
-            hist ("h_missingET") -> Fill(MissingET->sumet()/1000); // Basic MET
-        }
+        // const xAOD::MissingET* truthMET_NonInt = nullptr;
+        // truthMET_NonInt = (*truth_MET)["NonInt"];
+        // hist ("h_missingET_NonInt") -> Fill(truthMET_NonInt->met()/1000); // Non-interacting MET
+        // for (auto MissingET : *truth_MET ){
+        //     hist ("h_missingET") -> Fill(MissingET->sumet()/1000); // Basic MET
+        // }
 
         /* Testing fill hists */
         
@@ -443,6 +429,10 @@ StatusCode MyxAODAnalysis :: finalize ()
     // submission node after all your histogram outputs have been
     // merged.
 
+    std::cout << "n_Events:\t" << n_events << "\n";
+    std::cout << "n_Higgs:\t" << n_Higgs << "\n";
+    std::cout << "n_Zd:\t" << n_Zd << "\n";
+    std::cout << "All 4l cases:\t" << l_multiplicity << "\n";
     std::cout << "Bitmask 3:\t" << l_multiplicity_3 << "\n";
     std::cout << "Bitmask 12:\t" << l_multiplicity_12 << "\n";
     std::cout << "Total 44:\t" << l_multiplicity_44 << "\n";

@@ -17,13 +17,11 @@ ROOT.xAOD.Init().ignore()
 # for the details about these lines.
 sh = ROOT.SH.SampleHandler()
 sh.setMetaString( 'nc_tree', 'CollectionTree' )
-# inputFilePath = '/eos/user/c/connell/met4l-analysis/diS_model/MCProd_scripts/10/reco'
-# inputFilePath = '/eos/user/c/connell/met4l-analysis/xola-gen-code/generated/diS_events_10000/di_higgs_mH700.0_mS110.0_mZd20.0/reco'
-inputFilePath = '/eos/user/c/connell/met4l-analysis/xola-gen-code/generated/diS_events_10000/di_higgs_mH300.0_mS110.0_mZd20.0/reco'
+inputFilePath = '/eos/atlas/atlascerngroupdisk/phys-hmbs/hlrs/ZdZd/signal_sample_generator/automatedSignalGenerator/new_HAHM/ZZ_4l_mH500.0_mS413.0_mZd30.0/'
 
 print('Variable type is:', inputFilePath)
 # ROOT.SH.ScanDir().filePattern( 'DAOD_TRUTH1.truth1.root' ).scan( sh, inputFilePath )
-ROOT.SH.ScanDir().filePattern( 'DAOD_TRUTH1.truthDAOD_di_mS110_mZd20.pool.root' ).scan( sh, inputFilePath )
+ROOT.SH.ScanDir().filePattern( 'DAOD_TRUTH1.truthDAOD_ZZ_mS413_mZd30.pool.root' ).scan( sh, inputFilePath )
 sh.printContent()
 
 # Create an EventLoop job.
